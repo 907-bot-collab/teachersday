@@ -210,6 +210,27 @@ form .new a:hover{
   text-align: center;
   font-weight: 500;
 }
+
+.demo-credentials {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #666;
+}
+
+.demo-credentials h4 {
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.demo-credentials .cred {
+  margin: 5px 0;
+  font-family: monospace;
+}
   </style>
   </head>
   <body>
@@ -242,6 +263,13 @@ form .new a:hover{
     <div class="error-message" id="errorMessage">Invalid username or password!</div>
     <div class="success-message" id="successMessage">Login successful! Redirecting...</div>
     <input type="submit" value="Login">
+    
+    <!-- Demo credentials for testing -->
+    <div class="demo-credentials">
+      <h4>Demo Credentials:</h4>
+      <div class="cred"><strong>Admin:</strong> mrcl / 123456 → dashboard.html</div>
+      <div class="cred"><strong>User:</strong> john / password → profile.html</div>
+    </div>
   </form>
 </div>
     <script>
@@ -379,7 +407,7 @@ function generateBg(){
   }
 }
 
-// Login Authentication
+// Enhanced Login Authentication with Multiple Users
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -392,23 +420,35 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     errorMessage.style.display = 'none';
     successMessage.style.display = 'none';
     
-    // Check credentials
-    if (username === 'mrcl' && password === '123456') {
+    // Define multiple user credentials and their respective redirect pages
+    const users = {
+        'mrcl': {
+            password: '123456',
+            redirectPage: 'dashboard.html'
+        },
+        'john': {
+            password: 'password',
+            redirectPage: 'profile.html'
+        }
+    };
+    
+    // Check if username exists and password matches
+    if (users[username] && users[username].password === password) {
         // Show success message
         successMessage.style.display = 'block';
+        successMessage.textContent = `Welcome ${username}! Redirecting...`;
         
-        // Redirect after 2 seconds
+        // Redirect to user-specific page after 2 seconds
         setTimeout(function() {
-            // Replace 'dashboard.html' with your target page
-            // For demo purposes, redirecting to a placeholder
-            window.location.href = "dashboard.html";
+            window.location.href = users[username].redirectPage;
             
             // Alternative: You can also redirect to any URL
-            // window.location.href = 'https://example.com/dashboard';
+            // window.location.href = 'https://example.com/' + users[username].redirectPage;
         }, 2000);
     } else {
         // Show error message
         errorMessage.style.display = 'block';
+        errorMessage.textContent = 'Invalid username or password!';
     }
 });
 
