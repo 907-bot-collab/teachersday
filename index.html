@@ -422,14 +422,26 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     
     // Define multiple user credentials and their respective redirect pages
     const users = {
-        'mrcl': {
+        'sridhar-sir': {
             password: '123456',
             redirectPage: 'dashboard.html'
         },
-        'john': {
+        'dean': {
             password: 'password',
             redirectPage: 'profile.html'
-        }
+        },
+		'principal':{
+			password: 'Arjun Rao',
+			redirectPage: 'principal.html'
+         },
+		'jeevan-sir':{
+			password:'Jeevan',
+			redirectPage:'jeevansir.html'
+		},
+		'Hussian-sir':{
+			password:'Hussain',
+			redirectPage:'Hussainsir.html'
+		}
     };
     
     // Check if username exists and password matches
